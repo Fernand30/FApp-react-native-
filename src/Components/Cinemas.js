@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput } from "react-native";
+import { Text, View, TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput, FlatList } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
 
-
 import styles from './Styles/CinemasStyle'
 
+const data = [1,2,3,4,5,6,7,8,9,10,11,12,13]; 
 class Login extends Component {
   static navigationOptions = {
     header: false
@@ -14,75 +14,54 @@ class Login extends Component {
 
   constructor(props){
     super(props)
-    this.state=({
-      email: 'lauran.wilson@gamil.com',
-      password: '0123456789',
-      check: true
-    })
   }
 
-  forgotpassword = () => {
-    const forgotpassword = NavigationActions.navigate({
-      routeName: "ForgotPassword",
-      params: { name: "Shubhnik" }
+  mybooking = () => {
+    const mybooking = NavigationActions.navigate({
+      routeName: "MyBooking",
+      params: { name: "MyBooking" }
     });
-    this.props.navigation.dispatch(forgotpassword);
+    this.props.navigation.dispatch(mybooking);
   };
 
-  signup(){
-    const signup = NavigationActions.navigate({
-      routeName: "SignUp",
-      params: { name: "Shubhnik" }
-    });
-    this.props.navigation.dispatch(signup);
+  _renderItem({item}){
+      return(
+        <TouchableOpacity onPress={this.mybooking.bind(this)} style={styles.renderView}> 
+          <View style={styles.rowRow}>
+            <Text style={styles.text1}>DOWNTOWN INDEPENDENT</Text>
+            <Text style={styles.text2}>0.2ml</Text>
+          </View>
+          <View style={styles.street}>
+            <Text style={styles.text2}>251 South Main Street</Text>
+            <Text style={styles.text2}>Los Angeles, CA90012</Text>
+          </View>
+        </TouchableOpacity>
+      );
   }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <ImageBackground source={Images.background} style={styles.contentStyle}>
-          <Image source={Images.mark} style={styles.mark}/>
-          <View style={styles.rowView}>
-            <Image source={Images.mail} style={styles.mail}/>
-            <View style={styles.inputView}>
-              <Text style={styles.inputLabel}>Email</Text>
-              <TextInput 
-                  onChangeText={(text) => this.setState({email: text})} 
-                  style={styles.textinput} 
-                  value={this.state.email}/>
+        <View  style={styles.contentStyle}>
+          <View style={styles.headerView}>
+            <View style={styles.headerLeftView}>
+              <Image source={Images.mark} style={styles.mark}/>
+            </View>
+            <Text style={styles.title}>CINEMAS</Text>
+            <View style={styles.headerRightView}>
+              <TouchableOpacity>
+                <Image source = {Images.search} style={styles.search}/>
+              </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.rowView1}>
-            <Image source={Images.key} style={styles.key}/>
-            <View style={styles.inputView}>
-              <Text style={styles.inputLabel}>Password</Text>
-              <TextInput 
-                    onChangeText={(text) => this.setState({password: text})} 
-                    style={styles.textinput} 
-                    value={this.state.password}
-                    secureTextEntry={true}
-                    />
-            </View>
+          <View style={styles.mainView}>
+            <FlatList
+              data={data}
+              keyExtractor={(item, index) => index}
+              renderItem={this._renderItem.bind(this)}
+            />
           </View>
-          <View style={styles.rememberView}>
-            <TouchableOpacity onPress={()=>this.setState({check:!this.state.check})} style={styles.commonRowView}>
-              <View style={styles.checkView}>
-                {(this.state.check)?<Image source={Images.check} style={styles.check}/>:null}
-              </View>
-              <Text style={styles.text}>Remember Me</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.forgot} onPress={this.forgotpassword}>
-              <Text style={styles.forgotText}>Forgot Password?</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.loginButton} >
-            <Text style={styles.loginText}>Log In</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.skipButton}>
-            <Text style={styles.skipText}>SKIP</Text>
-          </TouchableOpacity>
-          <Text style={styles.signup} onPress={()=>{this.signup()}}>Don't have an account? SIGN UP</Text>
-        </ImageBackground>
+        </View>
       </SafeAreaView>  
     );
   }

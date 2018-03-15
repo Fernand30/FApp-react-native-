@@ -9,6 +9,10 @@ import Cinemas from "../Components/Cinemas";
 import Profile from "../Components/Profile";
 import Booking from "../Components/Booking";
 import Details from "../Components/Details";
+import ChooseSeat from "../Components/ChooseSeat";
+import Summary from "../Components/Summary";
+import MyBooking from "../Components/MyBooking";
+import Setting from "../Components/Setting";
 
 import React, { Component } from 'react'
 import { View, Image, Text, SafeAreaView } from 'react-native'
@@ -69,7 +73,7 @@ const TabNavigatorStack = TabNavigator({
              },
   CinemasTab : { screen: CinemasTab,
               navigationOptions: {
-                title: 'Alarm',
+                title: 'Cinemas',
                 tabBarIcon: ({ focused }) => {
                       const image = focused 
                       ? Images.selecttheatertab 
@@ -152,6 +156,18 @@ const navigator = StackNavigator({
   },
   Details: {
     screen: Details
+  },
+  ChooseSeat: {
+    screen: ChooseSeat
+  },
+  Summary: {
+    screen: Summary
+  },
+  MyBooking: {
+    screen: MyBooking
+  },
+  Setting: {
+    screen: Setting
   },
 });
 

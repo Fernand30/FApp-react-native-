@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput } from "react-native";
+import { Text, View, TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput, FlatList } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
-
 
 import styles from './Styles/ProfileStyle'
 
@@ -14,74 +13,57 @@ class Login extends Component {
 
   constructor(props){
     super(props)
-    this.state=({
-      email: 'lauran.wilson@gamil.com',
-      password: '0123456789',
-      check: true
-    })
   }
 
-  forgotpassword = () => {
-    const forgotpassword = NavigationActions.navigate({
-      routeName: "ForgotPassword",
-      params: { name: "Shubhnik" }
+  chooseseat = () => {
+    const chooseseat = NavigationActions.navigate({
+      routeName: "ChooseSeat",
+      params: { name: "ChooseSeat" }
     });
-    this.props.navigation.dispatch(forgotpassword);
+    this.props.navigation.dispatch(chooseseat);
   };
-
-  signup(){
-    const signup = NavigationActions.navigate({
-      routeName: "SignUp",
-      params: { name: "Shubhnik" }
-    });
-    this.props.navigation.dispatch(signup);
-  }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <ImageBackground source={Images.background} style={styles.contentStyle}>
-          <Image source={Images.mark} style={styles.mark}/>
-          <View style={styles.rowView}>
-            <Image source={Images.mail} style={styles.mail}/>
-            <View style={styles.inputView}>
-              <Text style={styles.inputLabel}>Email</Text>
-              <TextInput 
-                  onChangeText={(text) => this.setState({email: text})} 
-                  style={styles.textinput} 
-                  value={this.state.email}/>
-            </View>
+      <ImageBackground source={Images.profile} style={styles.contentStyle}>
+        <View style={styles.headerView}>
+          <View style={styles.headerLeftView}>
+            <Image source={Images.mark} style={styles.mark}/>
           </View>
-          <View style={styles.rowView1}>
-            <Image source={Images.key} style={styles.key}/>
-            <View style={styles.inputView}>
-              <Text style={styles.inputLabel}>Password</Text>
-              <TextInput 
-                    onChangeText={(text) => this.setState({password: text})} 
-                    style={styles.textinput} 
-                    value={this.state.password}
-                    secureTextEntry={true}
-                    />
-            </View>
-          </View>
-          <View style={styles.rememberView}>
-            <TouchableOpacity onPress={()=>this.setState({check:!this.state.check})} style={styles.commonRowView}>
-              <View style={styles.checkView}>
-                {(this.state.check)?<Image source={Images.check} style={styles.check}/>:null}
-              </View>
-              <Text style={styles.text}>Remember Me</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.forgot} onPress={this.forgotpassword}>
-              <Text style={styles.forgotText}>Forgot Password?</Text>
+          <Text style={styles.title}>PROFILE</Text>
+          <View style={styles.headerRightView}>
+            <TouchableOpacity>
+              <Image source = {Images.edit} style={styles.search}/>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.loginButton} >
-            <Text style={styles.loginText}>Log In</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.skipButton}>
-            <Text style={styles.skipText}>SKIP</Text>
-          </TouchableOpacity>
-          <Text style={styles.signup} onPress={()=>{this.signup()}}>Don't have an account? SIGN UP</Text>
+        </View>
+        <View style={{flex:1}}>
+          <View style={styles.mainView}>
+            <View style={styles.applyView}>
+              <Text style={styles.text1}>Name</Text>
+              <Text style={styles.text2}>Lauran Wilson</Text>
+            </View>
+            <View style={styles.applyView}>
+              <Text style={styles.text1}>Mobile Number</Text>
+              <Text style={styles.text2}>+962 111 234 68</Text>
+            </View>
+            <View style={styles.applyView}>
+              <Text style={styles.text1}>Email</Text>
+              <Text style={styles.text2}>laurn.wilson@gmail.com</Text>
+            </View>
+            <TouchableOpacity style={styles.changeView}>
+              <Text style={styles.text2}>CHANGE PASSWORD</Text>
+              <Image source={Images.play} style={styles.play}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.loginButton} >
+              <Text style={styles.loginText}>Logout</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.absoluteView}>
+            <Image source={Images.woman2} style={styles.woman}/>
+          </View>
+        </View>  
         </ImageBackground>
       </SafeAreaView>  
     );

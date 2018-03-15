@@ -36,6 +36,9 @@ const images = {
     backdance : require('../Assets/Images/backdance.png'),
     sortdown : require('../Assets/Images/sortdown.png'),
     close : require('../Assets/Images/close.png'),
+    profile : require('../Assets/Images/profile.png'),
+    play : require('../Assets/Images/play.png'),
+    summary : require('../Assets/Images/summary.png'),
 }
 
 export default images;

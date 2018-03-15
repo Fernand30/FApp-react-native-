@@ -11,118 +11,147 @@ export default StyleSheet.create({
     width: null,
     height: null,
   },
+  headerView:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: Colors.background,
+    height: Constants.MARGIN*12.5,
+    paddingHorizontal: Constants.MARGIN*3
+  },
+  headerLeftView:{
+    width: Constants.MARGIN*30
+  },
+  headerRightView:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    width: Constants.MARGIN*30
+  },
   mark:{
-    alignSelf: 'center',
-    width: Constants.MARGIN*20,
-    height: Constants.MARGIN*20/650*694,
-    marginTop: Constants.MARGIN*18
+    width: Constants.MARGIN*6,
+    height: Constants.MARGIN*6/650*694,
   },
-  rowView:{
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginHorizontal: Constants.MARGIN*12,
-    marginTop: Constants.MARGIN*16
-  },
-  rowView1:{
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginHorizontal: Constants.MARGIN*12,
-    marginTop: Constants.MARGIN*9
-  },
-  mail: {
-    width: Constants.MARGIN*5,
-    height: Constants.MARGIN*5/49*37
-  },
-  key: {
-    width: Constants.MARGIN*5,
-    height: Constants.MARGIN*5
-  },
-  inputView:{
-    paddingVertical: Constants.MARGIN,
-    borderBottomWidth: 0.7,
-    borderColor: 'white'
-  },
-  inputLabel: {
-    color: Colors.labelColor,
-    fontSize: Constants.FONT*17,
-    marginBottom: Constants.MARGIN*1.5
-  },
-  textinput: {
-    width: Constants.MARGIN*65,
+  title: {
     color: 'white',
-    fontSize: Constants.FONT*17,
-    height: Constants.MARGIN*6
+    fontSize: Constants.FONT*20,
+    textAlign: 'center',
+    fontWeight: '700',  
+    marginTop: Constants.MARGIN
   },
-  rememberView:{
+  search: {
+    width: Constants.MARGIN*4.5,
+    height: Constants.MARGIN*4.5,
+  },
+  renderView:{
+    backgroundColor: 'white',
+    borderRadius: 3,
+    paddingVertical: Constants.MARGIN*3,
+    marginHorizontal: Constants.MARGIN*2,
+    marginTop: Constants.MARGIN*2
+  },
+  street:{
+    marginTop: Constants.MARGIN*2,
+    paddingHorizontal: Constants.MARGIN*3
+  },
+  blackpanther:{
+    width: Constants.MARGIN*20,
+    height: Constants.MARGIN*20/219*325
+  },
+  explainView:{
+    marginLeft: Constants.MARGIN*3,
+    flex: 1,
+    paddingVertical: Constants.MARGIN*3,
+    justifyContent: 'space-between'
+  },
+  text1:{
+    fontSize: Constants.FONT*15,
+    marginBottom: Constants.MARGIN,
+    fontWeight: '300'
+  },
+  text2:{
+    fontSize: Constants.FONT*17
+  },
+  rowRow:{
     flexDirection: 'row',
-    marginLeft: Constants.MARGIN*12,
+    justifyContent: 'space-between',
     alignItems:'center',
-    marginTop: Constants.MARGIN*13
+    paddingHorizontal: Constants.MARGIN*3,
+    flex: 1
   },
-  commonRowView:{
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  checkView:{
-    width: Constants.MARGIN*4.2,
-    height: Constants.MARGIN*4.2,
-    borderRadius: 2,
+  bookView:{
+    width: Constants.MARGIN*16,
+    height: Constants.MARGIN*5.4,
+    borderRadius: Constants.MARGIN*2.7,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: Colors.buttonColor,
   },
-  check:{
+  book:{
+    color: 'white',
+    fontSize: Constants.FONT*12
+  },
+  fourstars:{
+    width: Constants.MARGIN*14,
+    height: Constants.MARGIN*14/1780*288,
+  },
+  mainView:{
+    flex: 1,
+    marginTop: Constants.MARGIN*21,
+    backgroundColor: 'white',
+    paddingTop: Constants.MARGIN*20
+  },
+  absoluteView:{
+    position: 'absolute',
+    top: Constants.MARGIN*8,
+    left: Constants.WIDTH/2- Constants.MARGIN*13,
+    width: Constants.MARGIN*26,
+    height: Constants.MARGIN*26,
+    borderRadius: Constants.MARGIN*13,
+    alignItems:'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    backgroundColor:'white'
+  },
+  woman:{
+    width: Constants.MARGIN*24,
+    height: Constants.MARGIN*24,
+    borderRadius: Constants.MARGIN*12
+  },
+  applyView:{
+    borderBottomWidth: 0.6,
+    borderColor: Colors.grayColor,
+    height :Constants.MARGIN*17,
+    justifyContent: 'center',
+    paddingLeft: Constants.MARGIN*5,
+  },
+  changeView:{
+    flexDirection: 'row',
+    paddingHorizontal: Constants.MARGIN*5,
+    alignItems:'center',
+    justifyContent: 'space-between',
+    height :Constants.MARGIN*12,
+  },
+  play:{
     width: Constants.MARGIN*3,
-    height: Constants.MARGIN*3/36*27
-  },
-  text:{
-    fontSize: Constants.FONT*17,
-    color: 'white',
-    marginLeft: Constants.MARGIN*3
-  },
-  forgot:{
-    marginLeft: Constants.MARGIN*11
-  },
-  forgotText:{
-    fontSize: Constants.FONT*17,
-    color: 'white',
+    height: Constants.MARGIN*3
   },
   loginButton:{
     height: Constants.MARGIN*12,
     borderRadius: Constants.MARGIN*6,
-    backgroundColor:'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: Constants.MARGIN*10,
-    marginHorizontal: Constants.MARGIN*20,
-  },
-  loginText:{
-    color: Colors.background,
-    fontSize: Constants.FONT*23
-  },
-  skipButton:{
-    height: Constants.MARGIN*9,
-    borderRadius: Constants.MARGIN*4.5,
-    backgroundColor:Colors.skipColor,
+    backgroundColor: Colors.background,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: Constants.MARGIN*8,
-    marginHorizontal: Constants.MARGIN*39,
-    borderWidth: 2,
-    borderColor: 'white'
+    marginHorizontal: Constants.MARGIN*20,
   },
-  skipText:{
+  loginText:{
     color: 'white',
-    fontSize: Constants.FONT*19
+    fontSize: Constants.FONT*23
   },
-  signup:{
-    color: 'white',
-    fontSize: Constants.FONT*20,
-    alignSelf: 'center',
-    marginTop: Constants.MARGIN*11
-  }
 })
 
 

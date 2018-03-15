@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput } from "react-native";
+import { Text, View, TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput, FlatList } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
 
-
 import styles from './Styles/MoviesStyle'
 
+const data = [1,2,3,4,5,6,7,8]; 
 class Login extends Component {
   static navigationOptions = {
     header: false
@@ -14,75 +14,57 @@ class Login extends Component {
 
   constructor(props){
     super(props)
-    this.state=({
-      email: 'lauran.wilson@gamil.com',
-      password: '0123456789',
-      check: true
-    })
   }
 
-  forgotpassword = () => {
-    const forgotpassword = NavigationActions.navigate({
-      routeName: "ForgotPassword",
-      params: { name: "Shubhnik" }
+  chooseseat = () => {
+    const chooseseat = NavigationActions.navigate({
+      routeName: "ChooseSeat",
+      params: { name: "ChooseSeat" }
     });
-    this.props.navigation.dispatch(forgotpassword);
+    this.props.navigation.dispatch(chooseseat);
   };
 
-  signup(){
-    const signup = NavigationActions.navigate({
-      routeName: "SignUp",
-      params: { name: "Shubhnik" }
-    });
-    this.props.navigation.dispatch(signup);
+  _renderItem({item}){
+      return(
+        <View style={styles.renderView}>
+          <Image source={Images.blackpanther} style={styles.blackpanther}/>
+          <View style={styles.explainView}>
+            <View style={styles.rowRow}>
+              <Text style={styles.text1}>BLACK PANTHER</Text>
+              <TouchableOpacity onPress={()=>this.chooseseat()} style={styles.bookView}>
+                <Text style={styles.book}>Book</Text>
+              </TouchableOpacity>
+            </View>
+            <Image source={Images.fourstars} style={styles.fourstars}/>
+            <Text style={styles.text2}>R, 1hr 22 mins{'\n'}David Oyelowo, Charlize Theron{'\n'}Open Friday</Text>
+          </View>
+        </View>
+      );
   }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <ImageBackground source={Images.background} style={styles.contentStyle}>
-          <Image source={Images.mark} style={styles.mark}/>
-          <View style={styles.rowView}>
-            <Image source={Images.mail} style={styles.mail}/>
-            <View style={styles.inputView}>
-              <Text style={styles.inputLabel}>Email</Text>
-              <TextInput 
-                  onChangeText={(text) => this.setState({email: text})} 
-                  style={styles.textinput} 
-                  value={this.state.email}/>
+        <View  style={styles.contentStyle}>
+          <View style={styles.headerView}>
+            <View style={styles.headerLeftView}>
+              <Image source={Images.mark} style={styles.mark}/>
+            </View>
+            <Text style={styles.title}>MOVIES</Text>
+            <View style={styles.headerRightView}>
+              <TouchableOpacity onPress={()=>this.details()}>
+                <Image source = {Images.search} style={styles.search}/>
+              </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.rowView1}>
-            <Image source={Images.key} style={styles.key}/>
-            <View style={styles.inputView}>
-              <Text style={styles.inputLabel}>Password</Text>
-              <TextInput 
-                    onChangeText={(text) => this.setState({password: text})} 
-                    style={styles.textinput} 
-                    value={this.state.password}
-                    secureTextEntry={true}
-                    />
-            </View>
+          <View style={styles.mainView}>
+            <FlatList
+              data={data}
+              keyExtractor={(item, index) => index}
+              renderItem={this._renderItem.bind(this)}
+            />
           </View>
-          <View style={styles.rememberView}>
-            <TouchableOpacity onPress={()=>this.setState({check:!this.state.check})} style={styles.commonRowView}>
-              <View style={styles.checkView}>
-                {(this.state.check)?<Image source={Images.check} style={styles.check}/>:null}
-              </View>
-              <Text style={styles.text}>Remember Me</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.forgot} onPress={this.forgotpassword}>
-              <Text style={styles.forgotText}>Forgot Password?</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.loginButton} >
-            <Text style={styles.loginText}>Log In</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.skipButton}>
-            <Text style={styles.skipText}>SKIP</Text>
-          </TouchableOpacity>
-          <Text style={styles.signup} onPress={()=>{this.signup()}}>Don't have an account? SIGN UP</Text>
-        </ImageBackground>
+        </View>
       </SafeAreaView>  
     );
   }

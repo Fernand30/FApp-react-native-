@@ -49,6 +49,7 @@ class Login extends Component {
         </View>
       );
   }
+  
   render() {
     return (
         <View style={styles.contentStyle}>

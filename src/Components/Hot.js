@@ -56,6 +56,15 @@ class Login extends Component {
     this.props.navigation.dispatch(booking);
   }
 
+  setting(){
+    this.setState({visible: false})
+    const setting = NavigationActions.navigate({
+      routeName: "Setting",
+      params: { name: "Setting" }
+    });
+    this.props.navigation.dispatch(setting);
+  }
+
   details(){
     const details = NavigationActions.navigate({
       routeName: "Details",
@@ -170,7 +179,7 @@ class Login extends Component {
               <Text style={styles.booking}>My Booking</Text>
             </TouchableOpacity>
             <View style={styles.barView}/>
-            <TouchableOpacity style={styles.eachView}>
+            <TouchableOpacity onPress={()=>this.setting()} style={styles.eachView}>
               <Image source={Images.settings} style={styles.settings}/>
               <Text style={styles.booking}>Settings</Text>
             </TouchableOpacity>

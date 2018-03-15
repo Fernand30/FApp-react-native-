@@ -167,7 +167,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-
   },
   checkView:{
     width: Constants.MARGIN*4.2,
