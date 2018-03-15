@@ -114,6 +114,7 @@ export default StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 3,
+    elevation: 4,
     backgroundColor:'white'
   },
   woman:{

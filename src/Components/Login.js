@@ -63,6 +63,7 @@ class Login extends Component {
             <View style={styles.inputView}>
               <Text style={styles.inputLabel}>Email</Text>
               <TextInput 
+                  underlineColorAndroid='transparent'
                   onChangeText={(text) => this.setState({email: text})} 
                   style={styles.textinput} 
                   value={this.state.email}/>
@@ -73,7 +74,8 @@ class Login extends Component {
             <View style={styles.inputView}>
               <Text style={styles.inputLabel}>Password</Text>
               <TextInput 
-                    onChangeText={(text) => this.setState({password: text})} 
+                    onChangeText={(text) => this.setState({password: text})}
+                    underlineColorAndroid='transparent' 
                     style={styles.textinput} 
                     value={this.state.password}
                     secureTextEntry={true}

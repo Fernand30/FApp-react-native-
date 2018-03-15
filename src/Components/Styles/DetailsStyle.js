@@ -121,9 +121,8 @@ export default StyleSheet.create({
     height: Constants.MARGIN*5
   },
   modalView:{
-    marginBottom: -Constants.MARGIN*5,
-    marginLeft: -Constants.MARGIN*5,
-    width: Constants.WIDTH,
+    
+    
     height: Constants.MARGIN*88,
     backgroundColor:'white'
   },

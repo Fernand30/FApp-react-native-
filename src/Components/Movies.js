@@ -52,7 +52,7 @@ class Login extends Component {
             </View>
             <Text style={styles.title}>MOVIES</Text>
             <View style={styles.headerRightView}>
-              <TouchableOpacity onPress={()=>this.details()}>
+              <TouchableOpacity>
                 <Image source = {Images.search} style={styles.search}/>
               </TouchableOpacity>
             </View>

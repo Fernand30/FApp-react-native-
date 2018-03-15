@@ -49,22 +49,27 @@ class Login extends Component {
           
           <TextInput 
                   onChangeText={(text) => this.setState({Username: text})} 
+                  underlineColorAndroid='transparent'
                   style={styles.inputText}
                   value={this.state.Username}/>
           <TextInput 
                   onChangeText={(text) => this.setState({Username: text})} 
+                  underlineColorAndroid='transparent'
                   style={styles.inputText}
                   value={this.state.Email}/>
           <TextInput 
                   onChangeText={(text) => this.setState({Username: text})} 
+                  underlineColorAndroid='transparent'
                   style={styles.inputText}
                   value={this.state.Phone}/>
           <TextInput 
                   onChangeText={(text) => this.setState({Username: text})} 
+                  underlineColorAndroid='transparent'
                   style={styles.inputText}
                   value={this.state.Password}/>
           <TextInput 
                   onChangeText={(text) => this.setState({Username: text})} 
+                  underlineColorAndroid='transparent'
                   style={styles.inputText}
                   value={this.state.Confirm}/>
 

@@ -40,7 +40,7 @@ export default StyleSheet.create({
     height: Constants.MARGIN*5
   },
   inputView:{
-    paddingVertical: Constants.MARGIN,
+    
     borderBottomWidth: 0.7,
     borderColor: 'white'
   },
@@ -53,7 +53,7 @@ export default StyleSheet.create({
     width: Constants.MARGIN*65,
     color: 'white',
     fontSize: Constants.FONT*17,
-    height: Constants.MARGIN*6
+    height: Constants.MARGIN*9,
   },
   rememberView:{
     flexDirection: 'row',

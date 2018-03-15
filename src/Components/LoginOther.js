@@ -52,10 +52,12 @@ class Login extends Component {
           <Image source={Images.mark} style={styles.mark}/>
           <TextInput 
                   onChangeText={(text) => this.setState({email: text})} 
+                  underlineColorAndroid='transparent'
                   style={styles.inputText}
                   value={this.state.email}/>
           <TextInput 
                   onChangeText={(text) => this.setState({password: text})} 
+                  underlineColorAndroid='transparent'
                   style={styles.inputText}
                   placeholder='Password'
                   secureTextEntry={true}

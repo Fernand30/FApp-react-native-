@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput} from "react-native";
+import { Text, View,BackHandler , TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput} from "react-native";
 import { NavigationActions } from "react-navigation";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from "react-redux";
@@ -40,6 +40,7 @@ class Login extends Component {
           <Text style={styles.whiteText}>Enter your email & we'll sebd{'\n'}you password</Text>
           <TextInput 
                   onChangeText={(text) => this.setState({email: text})} 
+                  underlineColorAndroid='transparent'
                   style={styles.inputText}
                   value={this.state.email}/>
           <TouchableOpacity style={styles.loginButton} >
