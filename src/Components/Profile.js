@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput, FlatList } from "react-native";
+import { Text, View, TouchableOpacity, BackHandler, ImageBackground, Image, SafeAreaView, TextInput, FlatList } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
@@ -14,6 +14,31 @@ class Login extends Component {
   constructor(props){
     super(props)
   }
+
+  // componentDidMount() {
+  //   that  = this
+  //   BackHandler.addEventListener('hardwareBackPress', function() {
+  //       that.goback();
+  //       return true;
+  //   });
+  // }
+
+  // componentWillUnmount() {
+  //   BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  // }
+
+  // handleBackButton() {
+  //   return true;
+  // }
+
+  goback = () => {
+    const login = NavigationActions.navigate({
+      routeName: "Login",
+      params: { name: "login" }
+    });
+    this.props.navigation.dispatch(login);
+  };
+
 
   chooseseat = () => {
     const chooseseat = NavigationActions.navigate({
@@ -56,7 +81,7 @@ class Login extends Component {
               <Text style={styles.text2}>CHANGE PASSWORD</Text>
               <Image source={Images.play} style={styles.play}/>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loginButton} >
+            <TouchableOpacity onPress={ this.goback.bind(this)} style={styles.loginButton} >
               <Text style={styles.loginText}>Logout</Text>
             </TouchableOpacity>
           </View>

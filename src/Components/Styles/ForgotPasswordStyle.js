@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { Constants, Colors } from '../../Themes/'
 
 export default StyleSheet.create({

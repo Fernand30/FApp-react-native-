@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ImageBackground, Image, Switch, SafeAreaView, TextInput, FlatList } from "react-native";
+import { Text, View, TouchableOpacity, BackHandler, ImageBackground, Image, Switch, SafeAreaView, TextInput, FlatList } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
@@ -18,8 +18,24 @@ class Login extends Component {
     })
   }
 
+  componentDidMount() {
+    that  = this
+    BackHandler.addEventListener('hardwareBackPress', function() {
+        that.goback();
+        return true;
+    });
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
+  }
+
   goback(){
-    this.props.navigation.goBack()
+    this.props.dispatch(NavigationActions.back());
   }
 
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View,BackHandler , TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput} from "react-native";
+import { Text, View, BackHandler , TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput} from "react-native";
 import { NavigationActions } from "react-navigation";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from "react-redux";
@@ -17,6 +17,22 @@ class Login extends Component {
     this.state=({
       email: 'Email',
     })
+  }
+
+  componentDidMount() {
+    that  = this
+    BackHandler.addEventListener('hardwareBackPress', function() {
+        that.goback();
+        return true;
+    });
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
   }
 
   goback = () => {

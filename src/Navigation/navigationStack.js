@@ -15,7 +15,7 @@ import MyBooking from "../Components/MyBooking";
 import Setting from "../Components/Setting";
 
 import React, { Component } from 'react'
-import { View, Image, Text, SafeAreaView } from 'react-native'
+import { View, Image, Text, SafeAreaView,Platform } from 'react-native'
 import { Colors, Images, Constants } from '../Themes'
 import styles from './NavigationStyles'
 
@@ -111,23 +111,27 @@ const TabNavigatorStack = TabNavigator({
     tabBarPosition:'bottom',
     tabBarOptions: {
       labelStyle: {
-        fontSize: Constants.FONT*14,
+        fontSize: Constants.FONT*11,
         textAlign:'center',
-        marginBottom: Constants.MARGIN*1.5,
+        marginBottom: Constants.MARGIN*1,
+        justifyContent: 'center',
+        lineHeight: Constants.MARGIN*3,
+      },
+      tabStyle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      indicatorStyle: {
+        borderBottomColor: '#ffffff',
+        borderBottomWidth: 2,
       },
       style: {
-		borderWidth: 0,
-		borderColor:'red',
-		height: Constants.MARGIN*15,
-		backgroundColor: 'white',
-		shadowColor: '#f1f1f1',
-		shadowRadius: 0,
-		shadowOpacity: 0.8,
-		shadowOffset: {
-		height: -3,
-		width: 0,
-		},
-	  },
+        height: Constants.MARGIN*14,
+        paddingTop: (Platform.OS === 'ios')? Constants.MARGIN*5: 0,
+        backgroundColor: 'white',
+        borderTopWidth:2,
+        borderColor: Colors.grayColor,
+     },
       showIcon:true,
       showLabel:true,
       activeTintColor:"#007ab9",
@@ -149,7 +153,7 @@ const navigator = StackNavigator({
     screen: SignUp
   },
   TabNavigatorStack: { 
-  	screen: TabNavigatorStack 
+    screen: TabNavigatorStack 
   },
   Booking: {
     screen: Booking

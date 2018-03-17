@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, FlatList, ImageBackground, Image, SafeAreaView, TextInput } from "react-native";
+import { Text, View, TouchableOpacity, BackHandler, FlatList, ImageBackground, Image, SafeAreaView, TextInput } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
@@ -24,8 +24,24 @@ class Login extends Component {
     _keyExtractor = (item, index) => item.id;
   }
 
+  componentDidMount() {
+    that  = this
+    BackHandler.addEventListener('hardwareBackPress', function() {
+        that.back();
+        return true;
+    });
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
+  }
+
   back(){
-    this.props.navigation.goBack()
+    this.props.dispatch(NavigationActions.back());
   }
 
   _renderItem({item}){
@@ -71,43 +87,47 @@ class Login extends Component {
               backdropOpacity={0.5} 
               isVisible={this.state.visible}
               >
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Number Of Persons</Text>
-              <Image source={Images.group} style={styles.group}/>
-              <View style={styles.modalRow}>
-                <Text style={styles.modalText}>Children</Text>
-                <View style={styles.dropView}>
-                  <Text style={styles.modalText}>0</Text>
-                  <Image source={Images.sortdown} style={styles.sortdown}/>
+              <View style={{flex:1}}>  
+              <TouchableOpacity onPress={()=>this.setState({ visible: false})} style={styles.touch1}/>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>Number Of Persons</Text>
+                  <Image source={Images.group} style={styles.group}/>
+                  <View style={styles.modalRow}>
+                    <Text style={styles.modalText}>Children</Text>
+                    <View style={styles.dropView}>
+                      <Text style={styles.modalText}>0</Text>
+                      <Image source={Images.sortdown} style={styles.sortdown}/>
+                    </View>
+                  </View>
+                  <View style={styles.modalRow}>
+                    <Text style={styles.modalText}>Adults</Text>
+                    <View style={styles.dropView}>
+                      <Text style={styles.modalText}>0</Text>
+                      <Image source={Images.sortdown} style={styles.sortdown}/>
+                    </View>
+                  </View>
+                  <View style={styles.modalRow}>
+                    <Text style={styles.modalText}>Senior</Text>
+                    <View style={styles.dropView}>
+                      <Text style={styles.modalText}>0</Text>
+                      <Image source={Images.sortdown} style={styles.sortdown}/>
+                    </View>
+                  </View>
+                  <View style={styles.modalRow}>
+                    <Text style={styles.modalText}>Total No. of Tickets</Text>
+                    <Text style={styles.modalText}>1</Text>
+                  </View>
+                  <View style={styles.buttonView}>
+                    <TouchableOpacity onPress={()=>this.setState({ visible: false})}>
+                      <Text style={styles.blueText1}>CANCEL</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.setState({ visible: false})}>
+                      <Text style={styles.blueText}>DONE</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-              <View style={styles.modalRow}>
-                <Text style={styles.modalText}>Adults</Text>
-                <View style={styles.dropView}>
-                  <Text style={styles.modalText}>0</Text>
-                  <Image source={Images.sortdown} style={styles.sortdown}/>
-                </View>
-              </View>
-              <View style={styles.modalRow}>
-                <Text style={styles.modalText}>Senior</Text>
-                <View style={styles.dropView}>
-                  <Text style={styles.modalText}>0</Text>
-                  <Image source={Images.sortdown} style={styles.sortdown}/>
-                </View>
-              </View>
-              <View style={styles.modalRow}>
-                <Text style={styles.modalText}>Total No. of Tickets</Text>
-                <Text style={styles.modalText}>1</Text>
-              </View>
-              <View style={styles.buttonView}>
-                <TouchableOpacity onPress={()=>this.setState({ visible: false})}>
-                  <Text style={styles.blueText1}>CANCEL</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.setState({ visible: false})}>
-                  <Text style={styles.blueText}>DONE</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+              <TouchableOpacity onPress={()=>this.setState({ visible: false})} style={styles.touch}/>
+            </View>    
           </Modal> 
         </View>
     );

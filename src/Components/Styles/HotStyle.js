@@ -69,6 +69,7 @@ export default StyleSheet.create({
   },
   text1:{
     fontSize: Constants.FONT*20,
+    fontWeight: '700'
   },
   text2:{
     fontSize: Constants.FONT*16,
@@ -100,9 +101,7 @@ export default StyleSheet.create({
     fontSize: Constants.FONT*12
   },
   modalView:{ 
-    marginTop:Constants.MARGIN*12.7,
     height: Constants.MARGIN*31,
-    marginLeft: -Constants.MARGIN*5,
     width: Constants.WIDTH, 
     backgroundColor:'#015885',
     flexDirection:'row',
@@ -110,6 +109,12 @@ export default StyleSheet.create({
     paddingVertical: Constants.MARGIN*3,
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  touch1:{
+    height:Constants.MARGIN*12.7,
+  },
+  touch2:{
+    flex:1
   },
   eachView:{
     alignItems: 'center',

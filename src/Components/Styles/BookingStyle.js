@@ -16,6 +16,9 @@ export default StyleSheet.create({
     width: Constants.MARGIN*5,
     height: Constants.MARGIN*5,
   },
+  touch:{
+    flex:1,
+  },
   whiteText:{
     color: 'white',
     fontSize: Constants.FONT*23,
@@ -73,8 +76,10 @@ export default StyleSheet.create({
     height: Constants.MARGIN*121,
     backgroundColor:'white',
     borderRadius: Constants.MARGIN*2,
-    marginTop: Constants.MARGIN*13,
     paddingVertical: Constants.MARGIN*5 
+  },
+  touch1:{
+    height: Constants.MARGIN*25,
   },
   blueText: {
     fontSize: Constants.FONT*20,

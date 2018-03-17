@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, FlatList, ImageBackground, Image, SafeAreaView, TextInput } from "react-native";
+import { Text, View, TouchableOpacity, BackHandler, FlatList, ImageBackground, Image, SafeAreaView, TextInput } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
@@ -23,8 +23,24 @@ class Login extends Component {
     _keyExtractor = (item, index) => item.id;
   }
 
+  componentDidMount() {
+    that  = this
+    BackHandler.addEventListener('hardwareBackPress', function() {
+        that.back();
+        return true;
+    });
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
+  }
+
   back(){
-    this.props.navigation.goBack()
+    this.props.dispatch(NavigationActions.back());
   }
 
   _renderItem({item}){
@@ -99,21 +115,23 @@ class Login extends Component {
           <Modal 
               backdropOpacity={0.5} 
               isVisible={this.state.visible}
-              style={{ justifyContent:'flex-end'}}
               >
-            <View style={styles.modalView}>
-              <View style={styles.titleView}>
-                <Image source={Images.close} style={styles.close}/>
-                <Text style={styles.modalText}>RATE & REVIEW</Text>
-                <View style={styles.close}/>
+            <View style={{flex:1, justifyContent:'flex-end'}}>  
+              <TouchableOpacity onPress={()=>this.setState({ visible: false})} style={styles.touch}/>
+              <View style={styles.modalView}>
+                <View style={styles.titleView}>
+                  <Image source={Images.close} style={styles.close}/>
+                  <Text style={styles.modalText}>RATE & REVIEW</Text>
+                  <View style={styles.close}/>
+                </View>
+                <Image source={Images.onestars} style={styles.onestars}/>
+                <View style={styles.feedbackView}>
+                  <Text style={styles.modalText}>Feedback</Text>
+                </View>
+                <TouchableOpacity onPress={()=>this.setState({ visible: false})}>
+                  <Text style={styles.modalDoneText}>DONE</Text>
+                </TouchableOpacity>
               </View>
-              <Image source={Images.onestars} style={styles.onestars}/>
-              <View style={styles.feedbackView}>
-                <Text style={styles.modalText}>Feedback</Text>
-              </View>
-              <TouchableOpacity onPress={()=>this.setState({ visible: false})}>
-                <Text style={styles.modalDoneText}>DONE</Text>
-              </TouchableOpacity>
             </View>
           </Modal> 
         </View>

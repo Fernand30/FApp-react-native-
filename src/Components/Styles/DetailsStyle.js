@@ -69,8 +69,10 @@ export default StyleSheet.create({
     height: Constants.MARGIN*121,
     backgroundColor:'white',
     borderRadius: Constants.MARGIN*2,
-    marginTop: Constants.MARGIN*13,
     paddingVertical: Constants.MARGIN*5 
+  },
+  touch:{
+    flex:1,
   },
   rateText:{
     color: 'white',

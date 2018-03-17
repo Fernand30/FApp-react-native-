@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ImageBackground, Image, SafeAreaView, TextInput, ScrollView } from "react-native";
+import { Text, View, TouchableOpacity, BackHandler, ImageBackground, Image, SafeAreaView, TextInput, ScrollView } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
@@ -31,6 +31,26 @@ class Login extends Component {
     })
   }
 
+  componentDidMount() {
+    that  = this
+    BackHandler.addEventListener('hardwareBackPress', function() {
+        that.goback();
+        return true;
+    });
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
+  }
+
+  goback = () => {
+    this.props.dispatch(NavigationActions.back());
+  };
+
   forgotpassword = () => {
     const forgotpassword = NavigationActions.navigate({
       routeName: "ForgotPassword",
@@ -38,14 +58,6 @@ class Login extends Component {
     });
     this.props.navigation.dispatch(forgotpassword);
   };
-
-  signup(){
-    const signup = NavigationActions.navigate({
-      routeName: "SignUp",
-      params: { name: "Shubhnik" }
-    });
-    this.props.navigation.dispatch(signup);
-  }
 
   booking(){
     this.setState({visible: false})
@@ -172,7 +184,8 @@ class Login extends Component {
             animationIn='slideInDown' 
             isVisible={this.state.visible} 
             animationOut = 'slideOutUp' 
-            style={{flex: 1, alignItems:'flex-start',justifyContent:'flex-start'}}>
+            style={{flex: 1}}>
+          <TouchableOpacity onPress={()=>this.setState({ visible: false})} style={styles.touch1}/>
           <View style={styles.modalView}>
             <TouchableOpacity onPress={()=>this.booking()} style={styles.eachView}>
               <Image source={Images.tickets} style={styles.tickets}/>
@@ -184,6 +197,7 @@ class Login extends Component {
               <Text style={styles.booking}>Settings</Text>
             </TouchableOpacity>
           </View>
+          <TouchableOpacity onPress={()=>this.setState({ visible: false})} style={styles.touch2}/>
         </Modal> 
         </View>
       </SafeAreaView>  

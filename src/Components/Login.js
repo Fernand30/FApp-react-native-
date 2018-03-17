@@ -55,7 +55,7 @@ class Login extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      
         <ImageBackground source={Images.background} style={styles.contentStyle}>
           <Image source={Images.mark} style={styles.mark}/>
           <View style={styles.rowView}>
@@ -101,7 +101,7 @@ class Login extends Component {
           </TouchableOpacity>
           <Text style={styles.signup} onPress={()=>{this.signup()}}>Don't have an account? SIGN UP</Text>
         </ImageBackground>
-      </SafeAreaView>  
+   
     );
   }
 }

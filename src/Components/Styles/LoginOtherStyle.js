@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { Constants, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
@@ -11,11 +11,17 @@ export default StyleSheet.create({
     width: null,
     height: null,
   },
-  mark:{
+  mark:(Platform.ios==='ios')?{
     alignSelf: 'center',
     width: Constants.MARGIN*20,
     height: Constants.MARGIN*20/650*694,
     marginTop: Constants.MARGIN*18,
+    marginBottom: Constants.MARGIN*15
+  }:{
+    alignSelf: 'center',
+    width: Constants.MARGIN*20,
+    height: Constants.MARGIN*20/650*694,
+    marginTop: Constants.MARGIN*10,
     marginBottom: Constants.MARGIN*15
   },
   rowView:{
