@@ -49,7 +49,7 @@ export default StyleSheet.create({
   },
   renderView:{
     flexDirection: 'row',
-    paddingTop: Constants.MARGIN*2
+    paddingBottom: Constants.MARGIN*2,
   },
   seatView:{
     width: Constants.MARGIN*5,
@@ -155,12 +155,11 @@ export default StyleSheet.create({
     fontWeight: '700'
   },
   mainView:{
-    flex: 1,
+    flex: 4,
     backgroundColor: 'white',
-    paddingLeft: Constants.MARGIN*4
   },
   seatlevel:{
-    marginTop: Constants.MARGIN*4,
+    marginVertical: Constants.MARGIN*4,
     fontSize: Constants.FONT*17,
     textAlign: 'center'
   },

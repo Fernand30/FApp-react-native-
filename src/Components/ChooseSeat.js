@@ -114,14 +114,16 @@ class Login extends Component {
               </View>
             </View>
           </View>
-          <ScrollView directionalLockEnabled={false}
-            horizontal={true} style={styles.mainView}>
+         
+          <ScrollView showsHorizontalScrollIndicator={false} horizontal = {true} style={styles.mainView}>
             <FlatList
               data={seat}
               keyExtractor={(item, index) => index}
               renderItem={this._renderItem}
             />
+            <View style={{width:20}}/>
           </ScrollView>
+         
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text3}>PROCEED</Text>
           </TouchableOpacity>

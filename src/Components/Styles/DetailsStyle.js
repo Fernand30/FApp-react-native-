@@ -1,16 +1,82 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { Constants, Colors } from '../../Themes/'
+
+const HEADER_MAX_HEIGHT = Constants.MARGIN*50;
+const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : Constants.MARGIN*18;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 export default StyleSheet.create({
   contentStyle: {
     flex: 1,
     backgroundColor: 'white'
   },
+  fill: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: Colors.background,
+    overflow: 'hidden',
+    height: HEADER_MAX_HEIGHT,
+  },
+  stars:{
+    width: Constants.MARGIN*20,
+    height: Constants.MARGIN*20/1780*288
+  },
+  absoluteView:{
+    position: 'absolute',
+    width: Constants.WIDTH,
+    alignItems:'center',
+    bottom:Constants.MARGIN*12, 
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: null,
+    height: HEADER_MAX_HEIGHT,
+    resizeMode: 'cover',
+  },
+  bar: {
+    backgroundColor: 'transparent',
+    marginTop: Platform.OS === 'ios' ? 28 : 38,
+    height: 32,
+    justifyContent: 'center',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: null,
+  },
+  title: {
+    color: 'white',
+    fontSize: 18,
+  },
+  scrollViewContent: {
+    // iOS uses content inset, which acts like padding.
+    paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
+  },
+  backbutton:{
+    alignSelf:'flex-start', 
+    marginLeft: Constants.MARGIN*3  
+  },
+  row: {
+    height: 40,
+    margin: 16,
+    backgroundColor: '#D3D3D3',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   dance: {
     width: Constants.WIDTH,
     height: Constants.MARGIN*44,
-    paddingTop: Constants.MARGIN*7,
-    paddingLeft: Constants.MARGIN*5
   },
   back: {
     width: Constants.MARGIN*5,
@@ -141,7 +207,7 @@ export default StyleSheet.create({
     marginBottom: Constants.MARGIN*2,
   },
   button:{
-    backgroundColor: Colors.buttonColor,
+    backgroundColor: Colors.background,
     alignItems: 'center',
     justifyContent: 'center',
     height: Constants.MARGIN*14

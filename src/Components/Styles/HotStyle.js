@@ -1,5 +1,9 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { Constants, Colors } from '../../Themes/'
+
+const HEADER_MAX_HEIGHT = Constants.MARGIN*50;
+const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : Constants.MARGIN*18;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 export default StyleSheet.create({
   container: {
@@ -14,6 +18,49 @@ export default StyleSheet.create({
     shadowColor: 'black',
     shadowOpacity: 1.0,
     backgroundColor: '#fefefe'
+  },
+  fill: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor:'transparent',
+    overflow: 'hidden',
+    height: HEADER_MAX_HEIGHT,
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: null,
+    height: HEADER_MAX_HEIGHT,
+    resizeMode: 'cover',
+  },
+  bar: {
+    backgroundColor: 'transparent',
+    marginTop: Platform.OS === 'ios' ? 28 : 38,
+    height: 32,
+    justifyContent: 'center',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: null,
+  },
+  title: {
+    color: 'white',
+    fontSize: 18,
+  },
+  scrollViewContent: {
+    // iOS uses content inset, which acts like padding.
+    paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
   },
   dance:{
     width: Constants.WIDTH,
@@ -55,11 +102,18 @@ export default StyleSheet.create({
   search: {
     width: Constants.MARGIN*4.5,
     height: Constants.MARGIN*4.5,
-    marginRight: Constants.MARGIN*5
   },
   menu: {
     width: Constants.MARGIN*1.2,
     height: Constants.MARGIN*1.2/12*48,
+  },
+  searchbutton: {
+    width: Constants.MARGIN*10,
+    alignItems: 'center'
+  },
+  menubutton: {
+    width: Constants.MARGIN*10,
+    alignItems: 'center'
   },
   customSlide:{
     paddingTop: Constants.MARGIN*3,
@@ -94,7 +148,7 @@ export default StyleSheet.create({
     borderRadius: Constants.MARGIN*2,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.buttonColor,
+    backgroundColor: Colors.background,
   },
   book:{
     color: 'white',
@@ -102,10 +156,8 @@ export default StyleSheet.create({
   },
   modalView:{ 
     height: Constants.MARGIN*31,
-    width: Constants.WIDTH, 
     backgroundColor:'#015885',
     flexDirection:'row',
-    paddingHorizontal: Constants.MARGIN*15,
     paddingVertical: Constants.MARGIN*3,
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -118,6 +170,7 @@ export default StyleSheet.create({
   },
   eachView:{
     alignItems: 'center',
+    flex:1,
   },
   fourstars:{
     width: Constants.MARGIN*14,
@@ -137,10 +190,10 @@ export default StyleSheet.create({
     marginTop: Constants.MARGIN*3
   },
   barView:{
-    width: 0.5,
+    width: 1,
     height: Constants.MARGIN*14,
     backgroundColor: 'white',
-    opacity: 0.2
+    opacity: 0.5
   },
   explainView:{
     paddingVertical: Constants.MARGIN*2,
@@ -172,6 +225,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: Constants.MARGIN*2
   },
   checkView:{
     width: Constants.MARGIN*4.2,

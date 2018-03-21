@@ -46,6 +46,7 @@ export default StyleSheet.create({
   search: {
     width: Constants.MARGIN*4.5,
     height: Constants.MARGIN*4.5,
+    marginRight: Constants.MARGIN*2,
   },
   renderView:{
     backgroundColor: 'white',

@@ -1,4 +1,7 @@
 {
+"expo": {
   "name": "flim",
-  "displayName": "flim"
+  "slug": "flim",
+  "sdkVersion": "25.0.0",
+}
 }

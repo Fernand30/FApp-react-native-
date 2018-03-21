@@ -4,7 +4,7 @@ import { Constants } from '../Themes/'
 export default StyleSheet.create({
   tab1: (Platform.OS === 'ios')? {
   	width: Constants.MARGIN*5,
-  	height: Constants.MARGIN*5/53*71
+  	height: Constants.MARGIN*5/53*71,
   }:{
     resizeMode: 'center',
   },

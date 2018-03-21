@@ -45,7 +45,6 @@ export default StyleSheet.create({
     height: Constants.MARGIN*5
   },
   inputView:{
-    
     borderBottomWidth: 0.7,
     borderColor: 'white'
   },
@@ -58,7 +57,8 @@ export default StyleSheet.create({
     width: Constants.MARGIN*65,
     color: 'white',
     fontSize: Constants.FONT*17,
-    height: Constants.MARGIN*9,
+    height: Constants.MARGIN*8,
+    paddingBottom:Constants.MARGIN*1,
   },
   rememberView:{
     flexDirection: 'row',

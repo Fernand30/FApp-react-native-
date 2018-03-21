@@ -1,10 +1,30 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, BackHandler, FlatList, ImageBackground, Image, SafeAreaView, TextInput } from "react-native";
+import {
+  Text, 
+  View, 
+  TouchableOpacity, 
+  BackHandler,
+  ScrollView, 
+  FlatList, 
+  ImageBackground, 
+  Image, 
+  SafeAreaView, 
+  TextInput,
+  Animated,
+  StatusBar,
+  Platform,
+  RefreshControl,
+} from "react-native";
+
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
 import Modal from "react-native-modal";
+import { Rating } from 'react-native-ratings';
 
+const HEADER_MAX_HEIGHT = Constants.MARGIN*50;
+const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? Constants.MARGIN*18 : Constants.MARGIN*18;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 import styles from './Styles/DetailsStyle'
 
@@ -18,9 +38,14 @@ class Login extends Component {
   constructor(props){
     super(props)
     this.state=({
-      visible: false
+      visible: false,
+      scrollY: new Animated.Value(
+        // iOS has negative initial scroll value because content inset...
+        Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
+      ),
+      refreshing: false,
+      rating: 0
     })
-    _keyExtractor = (item, index) => item.id;
   }
 
   componentDidMount() {
@@ -38,6 +63,10 @@ class Login extends Component {
   handleBackButton() {
     return true;
   }
+
+ratingCompleted(rating) {
+  this.setState({rating: rating})
+}
 
   back(){
     this.props.dispatch(NavigationActions.back());
@@ -65,18 +94,11 @@ class Login extends Component {
         </View>
       );
   }
-  
-  render() {
+
+  _renderScrollViewContent() { 
     return (
-        <View style={styles.contentStyle}>
-          <ImageBackground source={Images.backdance} style={styles.dance}>
-            <TouchableOpacity onPress={()=>this.back()}>
-              <Image source={Images.back} style={styles.back}/>
-            </TouchableOpacity>
-            <Text style={styles.whiteText}>BEATTY AND THE BEAST</Text>
-            <Image source={Images.fourstars} style={styles.fourstars}/>
-          </ImageBackground>
-          <View style={styles.rowView}>
+      <View style={styles.scrollViewContent}>
+        <View style={styles.rowView}>
             <View>
               <Text style={styles.blueText}>Release Date</Text>
               <Text style={styles.text1}>23 February 2017</Text>
@@ -109,32 +131,159 @@ class Login extends Component {
             keyExtractor={(item, index) => index}
             renderItem={this._renderItem}
           />
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>BOOK TICKETS</Text>
-          </TouchableOpacity>
-          <Modal 
-              backdropOpacity={0.5} 
-              isVisible={this.state.visible}
-              >
-            <View style={{flex:1, justifyContent:'flex-end'}}>  
-              <TouchableOpacity onPress={()=>this.setState({ visible: false})} style={styles.touch}/>
-              <View style={styles.modalView}>
-                <View style={styles.titleView}>
-                  <Image source={Images.close} style={styles.close}/>
-                  <Text style={styles.modalText}>RATE & REVIEW</Text>
-                  <View style={styles.close}/>
+      </View>
+    );
+  }
+  
+  render() {
+    const scrollY = Animated.add(
+      this.state.scrollY,
+      Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
+    );
+    const headerTranslate = scrollY.interpolate({
+      inputRange: [0, HEADER_SCROLL_DISTANCE],
+      outputRange: [0, -HEADER_SCROLL_DISTANCE],
+      extrapolate: 'clamp',
+    });
+
+    const imageOpacity = scrollY.interpolate({
+      inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+      outputRange: [1, 1, 0],
+      extrapolate: 'clamp',
+    });
+    const imageTranslate = scrollY.interpolate({
+      inputRange: [0, HEADER_SCROLL_DISTANCE],
+      outputRange: [0, 0],
+      extrapolate: 'clamp',
+    });
+
+    const titleScale = scrollY.interpolate({
+      inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+      outputRange: [1, 1, 0.8],
+      extrapolate: 'clamp',
+    });
+    const titleTranslate = scrollY.interpolate({
+      inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+      outputRange: [0, 0, -8],
+      extrapolate: 'clamp',
+    });
+
+    modalview = <Modal 
+                  backdropOpacity={0.5} 
+                  isVisible={this.state.visible}
+                  >
+                <View style={{flex:1, justifyContent:'flex-end'}}>  
+                  <TouchableOpacity onPress={()=>this.setState({ visible: false})} style={styles.touch}/>
+                  <View style={styles.modalView}>
+                    <View style={styles.titleView}>
+                      <Image source={Images.close} style={styles.close}/>
+                      <Text style={styles.modalText}>RATE & REVIEW</Text>
+                      <View style={styles.close}/>
+                    </View>
+                    <Rating
+                        imageSize={20}
+                        rating={1}
+                        style={{marginTop:20, marginLeft:20}}
+                      />
+                    <View style={styles.feedbackView}>
+                      <Text style={styles.modalText}>Feedback</Text>
+                    </View>
+                    <TouchableOpacity onPress={()=>this.setState({ visible: false})}>
+                      <Text style={styles.modalDoneText}>DONE</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-                <Image source={Images.onestars} style={styles.onestars}/>
-                <View style={styles.feedbackView}>
-                  <Text style={styles.modalText}>Feedback</Text>
-                </View>
-                <TouchableOpacity onPress={()=>this.setState({ visible: false})}>
-                  <Text style={styles.modalDoneText}>DONE</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal> 
-        </View>
+              </Modal> 
+
+    return (
+        <View style={styles.fill}>
+        <StatusBar
+          translucent
+          barStyle="light-content"
+          backgroundColor="rgba(0, 0, 0, 0.251)"
+        />
+        <Animated.ScrollView
+          style={styles.fill}
+          scrollEventThrottle={1}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
+            { useNativeDriver: true },
+          )}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={() => {
+                this.setState({ refreshing: true });
+                setTimeout(() => this.setState({ refreshing: false }), 1000);
+              }}
+              // Android offset for RefreshControl
+              progressViewOffset={HEADER_MAX_HEIGHT}
+            />
+          }
+          // iOS offset for RefreshControl
+          contentInset={{
+            top: HEADER_MAX_HEIGHT,
+          }}
+          contentOffset={{
+            y: -HEADER_MAX_HEIGHT,
+          }}
+        >
+          {this._renderScrollViewContent()}
+        </Animated.ScrollView>
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            styles.header,
+            { transform: [{ translateY: headerTranslate }] },
+          ]}
+        >
+          <Animated.Image
+            style={[
+              styles.backgroundImage,
+              {
+                opacity: imageOpacity,
+                transform: [{ translateY: imageTranslate }],
+              },
+            ]}
+            source={Images.backdance}
+          />
+         <Animated.Text style={{opacity: imageOpacity,transform: [{ translateY: imageTranslate }],
+                        width: Constants.WIDTH, position:'absolute', bottom:Constants.MARGIN*17, left: 0,fontSize:20,color:'white',textAlign:'center'}}>
+                    BEAUTY AND THE BEAST
+         </Animated.Text>
+         <View style={styles.absoluteView}>
+           <Animated.Image
+              style={[
+                styles.stars,
+                {
+                  opacity: imageOpacity,
+                  transform: [{ translateY: imageTranslate }],
+                },
+              ]}
+              source={Images.fourstars}
+            />
+          </View>  
+        </Animated.View>
+        <Animated.View
+          style={[
+            styles.bar,
+            {
+              transform: [
+               
+                { translateY: titleTranslate },
+              ],
+            },
+          ]}
+        >
+          <TouchableOpacity style={styles.backbutton} onPress={this.back.bind(this)} >
+            <Image source={Images.back} style={styles.back}/>
+          </TouchableOpacity>  
+        </Animated.View>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>BOOK TICKETS</Text>
+        </TouchableOpacity>
+        {modalview}
+      </View>
     );
   }
 }

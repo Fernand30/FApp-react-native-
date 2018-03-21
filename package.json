@@ -7,12 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "expo": "^25.0.0",
     "react": "16.0.0",
     "react-native": "0.52.0",
-    "expo": "^25.0.0",
     "react-native-image-slider": "^2.0.3",
     "react-native-keyboard-aware-scroll-view": "^0.4.4",
     "react-native-modal": "^5.2.0",
+    "react-native-ratings": "^5.3.0",
     "react-native-responsive-dimensions": "^1.0.2",
     "react-navigation": "1.0.0-beta.15",
     "react-redux": "^5.0.6",

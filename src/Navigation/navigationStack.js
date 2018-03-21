@@ -113,13 +113,12 @@ const TabNavigatorStack = TabNavigator({
       labelStyle: {
         fontSize: Constants.FONT*11,
         textAlign:'center',
-        marginBottom: Constants.MARGIN*1,
-        justifyContent: 'center',
-        lineHeight: Constants.MARGIN*3,
+        marginTop: (Platform.OS === 'ios')?Constants.MARGIN*5:Constants.MARGIN*1.5,
+        lineHeight: Constants.MARGIN*2.2,
       },
       tabStyle: {
-        justifyContent: 'center',
-        alignItems: 'center',
+       alignItems:'center',
+       justifyContent: 'center'
       },
       indicatorStyle: {
         borderBottomColor: '#ffffff',
@@ -127,7 +126,7 @@ const TabNavigatorStack = TabNavigator({
       },
       style: {
         height: Constants.MARGIN*14,
-        paddingTop: (Platform.OS === 'ios')? Constants.MARGIN*5: 0,
+        paddingTop: (Platform.OS === 'ios')? Constants.MARGIN*3 : 0,
         backgroundColor: 'white',
         borderTopWidth:2,
         borderColor: Colors.grayColor,
