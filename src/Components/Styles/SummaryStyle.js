@@ -70,7 +70,7 @@ export default StyleSheet.create({
     marginHorizontal: Constants.MARGIN*5
   },
   payment:{
-    fontSize: Constants.FONT*19,
+    fontSize: Constants.FONT*22,
     fontWeight: '700',
     marginLeft: Constants.MARGIN*5,
     marginTop: Constants.MARGIN*15
@@ -79,8 +79,13 @@ export default StyleSheet.create({
     fontSize: Constants.FONT*30,
   },
   text1:{
-    fontSize: Constants.FONT*19,
+    fontSize: Constants.FONT*20,
     fontWeight: '700'
+  },
+  text4:{
+    fontSize: Constants.FONT*19,
+    fontWeight: '600',
+    marginTop : Constants.MARGIN
   },
   enter:{
     fontSize: Constants.FONT*19,
@@ -89,6 +94,10 @@ export default StyleSheet.create({
   },
   text2:{
     fontSize: Constants.FONT*16
+  },
+  total:{
+    fontSize: Constants.FONT*18,
+    fontWeight: '600'
   },
   text3:{
     fontSize: Constants.FONT*14
@@ -115,12 +124,12 @@ export default StyleSheet.create({
   },
   visaView:{
     marginHorizontal: Constants.MARGIN*5,
-    paddingVertical: Constants.MARGIN*5,
+    paddingVertical: Constants.MARGIN*4,
     shadowOffset:{  width: 0,  height: 1,  },
     shadowColor: 'black',
-    shadowOpacity: 0.7,
-    shadowRadius: 3,
-    borderRadius: 2,
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    borderRadius: 3,
     flexDirection: 'row',
     paddingHorizontal: Constants.MARGIN*5,
     alignItems: 'center',

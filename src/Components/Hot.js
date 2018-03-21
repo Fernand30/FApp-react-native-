@@ -215,12 +215,16 @@ class Login extends Component {
                 <TouchableOpacity onPress={()=>this.setState({ visible: false})} style={styles.touch1}/>
                 <View style={styles.modalView}>
                   <TouchableOpacity onPress={()=>this.booking()} style={styles.eachView}>
-                    <Image source={Images.tickets} style={styles.tickets}/>
+                    <View style={styles.fixView}>
+                      <Image source={Images.tickets} style={styles.tickets}/>
+                    </View>
                     <Text style={styles.booking}>My Bookings</Text>
                   </TouchableOpacity>
                   <View style={styles.barView}/>
                   <TouchableOpacity onPress={()=>this.setting()} style={styles.eachView}>
-                    <Image source={Images.settings} style={styles.settings}/>
+                    <View style={styles.fixView}>
+                      <Image source={Images.settings} style={styles.settings}/>
+                    </View>
                     <Text style={styles.booking}>Settings</Text>
                   </TouchableOpacity>
                 </View>

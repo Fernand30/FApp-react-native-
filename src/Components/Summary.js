@@ -85,15 +85,15 @@ class Login extends Component {
             </View> 
             <View style={styles.underline}/> 
             <View style={styles.rowView}>
-              <Text style={styles.text2}>Total</Text>
-              <Text style={styles.text2}>$105</Text>
+              <Text style={styles.total}>Total</Text>
+              <Text style={styles.total}>$105</Text>
             </View>  
           </View>
           <Text style={styles.payment}>Payment Method</Text>
           <View style={styles.visaView}>
             <View>
               <Text style={styles.text1}>Lauran Wilson</Text>
-              <Text style={styles.text1}>****1640</Text>
+              <Text style={styles.text4}>****1640</Text>
             </View>
             <Image source={Images.visa} style={styles.visa}/>
           </View>

@@ -189,6 +189,10 @@ export default StyleSheet.create({
     fontSize: Constants.FONT*20,
     marginTop: Constants.MARGIN*3
   },
+  fixView:{
+    height: Constants.MARGIN*12,
+    justifyContent:'flex-end'
+  },
   barView:{
     width: 1,
     height: Constants.MARGIN*14,

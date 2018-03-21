@@ -23,8 +23,15 @@ export default StyleSheet.create({
     height: Constants.MARGIN*12.5,
     paddingHorizontal: Constants.MARGIN*3
   },
+  draggableContainer:{
+    width: Constants.WIDTH+Constants.MARGIN*20,
+    height: Constants.HEIGHT+Constants.MARGIN*20
+  },
   headerLeftView:{
     width: Constants.MARGIN*30
+  },
+  pan:{
+    marginTop : Constants.MARGIN*10
   },
   back:{
     width: Constants.MARGIN*5,

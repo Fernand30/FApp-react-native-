@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ImageBackground, BackHandler, Image, ScrollView, SafeAreaView, TextInput, FlatList } from "react-native";
+import { PanResponder,Text, Platform, View, TouchableOpacity, ImageBackground, BackHandler, Image, ScrollView, SafeAreaView, TextInput, FlatList,Animated } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import { Colors, Images, Constants } from '../Themes'
-
+import PropTypes from 'prop-types';
 import styles from './Styles/ChooseSeatStyle'
+
+
 seat = [
  ['GOLD-RS.150'],
  [{state:0, number:0},{state:1,number:1},{state: 1, number: 2},{state: 2,number:3},{state:2, number: 4},{state:2, number:5},{state:2, number: 6},{state:2, number:7},{state:2, number:8},{state:2, number: 9},{state:2, number: 10},{state:2, number: 11},{state:2, number:12},{state:2, number: 13},{state:2, number: 14},{state:2, number:15},{state:2, number: 16}],
@@ -32,6 +34,18 @@ class Login extends Component {
   constructor(props){
     super(props)
     i = 0
+    this.state = {
+        pan     : new Animated.ValueXY()  
+    };
+
+    this.panResponder = PanResponder.create({    //Step 2
+        onStartShouldSetPanResponder : () => true,
+        onPanResponderMove           : Animated.event([null,{ //Step 3
+            dx : this.state.pan.x,
+            dy : this.state.pan.y
+        }]),
+        onPanResponderRelease        : (e, gesture) => {} //Step 4
+    });
   }
 
   componentDidMount() {
@@ -86,10 +100,28 @@ class Login extends Component {
       );
   }
 
+   renderDraggable(){
+      return (
+          <View style={styles.draggableContainer}>
+            <Animated.View 
+                {...this.panResponder.panHandlers}                       
+                style={[this.state.pan.getLayout(), styles.pan]}>     
+                <FlatList
+                  data={seat}
+                  keyExtractor={(item, index) => index}
+                  renderItem={this._renderItem}
+                  scrollEnabled={false}
+                />
+            </Animated.View>
+        </View>
+        )
+    }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <View  style={styles.contentStyle}>
+
           <View style={styles.headerView}>
             <View style={styles.headerRightView}>
               <TouchableOpacity onPress={()=>this.goback()}>
@@ -114,16 +146,12 @@ class Login extends Component {
               </View>
             </View>
           </View>
-         
-          <ScrollView showsHorizontalScrollIndicator={false} horizontal = {true} style={styles.mainView}>
-            <FlatList
-              data={seat}
-              keyExtractor={(item, index) => index}
-              renderItem={this._renderItem}
-            />
-            <View style={{width:20}}/>
-          </ScrollView>
-         
+          <View style={(Platform.OS === 'ios')?{flex:1, overflow: 'hidden'}:{flex:1, backgroundColor: 'transparent'}}>
+            
+              {this.renderDraggable()}
+            
+          </View>  
+          
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text3}>PROCEED</Text>
           </TouchableOpacity>
