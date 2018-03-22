@@ -69,7 +69,7 @@ class Login extends Component {
     this.props.dispatch(NavigationActions.back());
   }
 
-  _renderItem({item}){
+  _renderItem(item){
       if(item.length==1){
         return (<Text style={styles.seatlevel}>{item}</Text>)
       }
@@ -118,6 +118,16 @@ class Login extends Component {
     }
 
   render() {
+    that =this
+    alldata=seat.map(function(item){
+      i++
+      return(
+        <View key={i} style={styles.renderView}>
+          {that._renderItem(item)}
+        </View>
+        )
+    })
+
     return (
       <SafeAreaView style={styles.container}>
         <View  style={styles.contentStyle}>
@@ -146,11 +156,17 @@ class Login extends Component {
               </View>
             </View>
           </View>
-          <View style={(Platform.OS === 'ios')?{flex:1, overflow: 'hidden'}:{flex:1, backgroundColor: 'transparent'}}>
-            
-              {this.renderDraggable()}
-            
-          </View>  
+          <ScrollView  
+                showsHorizontalScrollIndicator={false}
+                horizontal={true} style={{flex:1}}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{flex:1}}>
+                <View style={{flex:1,paddingBottom:10}}>
+                  {alldata}
+                </View>
+            </ScrollView>
+          </ScrollView>  
           
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text3}>PROCEED</Text>

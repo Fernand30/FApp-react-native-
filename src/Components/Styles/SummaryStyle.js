@@ -134,7 +134,8 @@ export default StyleSheet.create({
     paddingHorizontal: Constants.MARGIN*5,
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: Constants.MARGIN*3
+    marginTop: Constants.MARGIN*3,
+    elevation: 2,
   },
   visa:{
     width: Constants.MARGIN*16,
