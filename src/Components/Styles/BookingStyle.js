@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 import { Constants, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
-  container: {
+  contentStyle: {
     flex: 1,
     backgroundColor: Colors.grayColor
   },
@@ -109,12 +109,16 @@ export default StyleSheet.create({
     height: Constants.MARGIN*3
   },
   renderView:{
-    marginTop: Constants.MARGIN*3,
+    marginVertical: Constants.MARGIN*1.5,
     marginHorizontal: Constants.MARGIN*2,
     backgroundColor: 'white',
     borderRadius: Constants.MARGIN*1.5,
-    height: Constants.MARGIN*29,
-    paddingTop: Constants.MARGIN*3
+    paddingVertical: Constants.MARGIN*3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+    elevation: 1,
   },
   timeView:{
     width: Constants.MARGIN*19,
@@ -122,17 +126,26 @@ export default StyleSheet.create({
     borderRadius: Constants.MARGIN*3,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 0.5,
+    borderWidth: 1.5,
     borderColor: 'black',
     marginLeft: Constants.MARGIN*3,
     marginTop: Constants.MARGIN*3
+  },
+  border:{
+    width: Constants.MARGIN*21,
+    height: Constants.MARGIN*21/201*69,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: Constants.MARGIN*2,
   },
   timeText:{
     fontSize: Constants.FONT*14
   },
   wrapView:{
     flexWrap: 'wrap',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    paddingHorizontal: Constants.MARGIN*3
   }
 })
 

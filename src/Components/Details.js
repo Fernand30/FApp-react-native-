@@ -203,6 +203,7 @@ ratingCompleted(rating) {
           backgroundColor="rgba(0, 0, 0, 0.251)"
         />
         <Animated.ScrollView
+          showsVerticalScrollIndicator={false}
           style={styles.fill}
           scrollEventThrottle={1}
           onScroll={Animated.event(

@@ -61,6 +61,7 @@ export default StyleSheet.create({
   scrollViewContent: {
     // iOS uses content inset, which acts like padding.
     paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
+    
   },
   dance:{
     width: Constants.WIDTH,
@@ -211,7 +212,6 @@ export default StyleSheet.create({
   sliderView:{
     backgroundColor: Colors.grayColor,
     paddingLeft: Constants.MARGIN*3,
-    paddingVertical: Constants.MARGIN*2,
     justifyContent: 'center',
   },
   renderImage:{
@@ -229,7 +229,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: Constants.MARGIN*2
+    marginVertical: Constants.MARGIN*2
   },
   checkView:{
     width: Constants.MARGIN*4.2,

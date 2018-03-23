@@ -89,6 +89,7 @@ class Login extends Component {
 
           <View style={styles.mainView}>
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={data}
               keyExtractor={(item, index) => index}
               renderItem={this._renderItem.bind(this)}

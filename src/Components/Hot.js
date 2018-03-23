@@ -174,6 +174,7 @@ class Login extends Component {
           <View style={styles.newsView}>
             <Text style={styles.text1}>News</Text>
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={news}
               keyExtractor={(item, index) => index}
               renderItem={this._renderNews}
@@ -248,8 +249,9 @@ class Login extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{flex:1,}}>
+          <View style={{flex:1}}>
              <Animated.ScrollView
+              showsVerticalScrollIndicator={false}
               style={styles.fill}
               scrollEventThrottle={1}
               onScroll={Animated.event(
@@ -264,12 +266,12 @@ class Login extends Component {
                     setTimeout(() => this.setState({ refreshing: false }), 1000);
                   }}
                   // Android offset for RefreshControl
-                  progressViewOffset={HEADER_MAX_HEIGHT}
+                  progressViewOffset={Constants.MARGIN*20}
                 />
               }
               // iOS offset for RefreshControl
               contentInset={{
-                top: HEADER_MAX_HEIGHT,
+                top: Constants.MARGIN*60,
               }}
               contentOffset={{
                 y: -HEADER_MAX_HEIGHT,

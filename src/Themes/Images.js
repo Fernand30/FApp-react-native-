@@ -39,6 +39,8 @@ const images = {
     profile : require('../Assets/Images/profile.png'),
     play : require('../Assets/Images/play.png'),
     summary : require('../Assets/Images/summary.png'),
+    border : require('../Assets/Images/border.png'),
+    selectborder : require('../Assets/Images/selectborder.png'),
 }
 
 export default images;

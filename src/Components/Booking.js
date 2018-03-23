@@ -8,9 +8,21 @@ import Modal from "react-native-modal";
 
 import styles from './Styles/BookingStyle'
 
-const data = ['1','2','3','4','5','6','7']
-const timeArray = [{id:1,time:'8:00 AM'},{id:2,time:'12:00 PM'},{id:3,time:'4:00 PM'},{id:4,time:'8:00 PM'},{id:5,time:'12:00 PM'},]
-
+const timeArray = [ {id:0,array:[{id:0,time:'8:00 AM',selected:true},{id:1,time:'12:00 PM',selected:false},{id:2,time:'4:00 PM',selected:false},{id:3,time:'8:00 PM',selected:false},{id:4,time:'12:00 PM',selected:false}]},
+                    {id:1,array:[{id:0,time:'8:00 AM',selected:false},{id:1,time:'12:00 PM',selected:false},{id:2,time:'4:00 PM',selected:false},{id:3,time:'8:00 PM',selected:false},{id:4,time:'12:00 PM',selected:false}]},
+                    {id:2,array:[{id:0,time:'8:00 AM',selected:false},{id:1,time:'12:00 PM',selected:false},{id:2,time:'4:00 PM',selected:false},{id:3,time:'8:00 PM',selected:false},{id:4,time:'12:00 PM',selected:false}]},
+                    {id:3,array:[{id:0,time:'8:00 AM',selected:false},{id:1,time:'12:00 PM',selected:false},{id:2,time:'4:00 PM',selected:false},{id:3,time:'8:00 PM',selected:false},{id:4,time:'12:00 PM',selected:false}]},
+                    {id:4,array:[{id:0,time:'8:00 AM',selected:false},{id:1,time:'12:00 PM',selected:false},{id:2,time:'4:00 PM',selected:false},{id:3,time:'8:00 PM',selected:false},{id:4,time:'12:00 PM',selected:false}]},
+                  ]
+function copy(o) {
+   var output, v, key;
+   output = Array.isArray(o) ? [] : {};
+   for (key in o) {
+       v = o[key];
+       output[key] = (typeof v === "object") ? copy(v) : v;
+   }
+   return output;
+}
 class Login extends Component {
   static navigationOptions = {
     header: false
@@ -20,6 +32,7 @@ class Login extends Component {
     super(props)
     this.state=({
       visible: false,
+      timeArray: timeArray
     })
     _keyExtractor = (item, index) => item.id;
   }
@@ -44,12 +57,42 @@ class Login extends Component {
     this.props.dispatch(NavigationActions.back());
   }
 
+  selectbook(movid, timeid){
+
+    ary = copy(this.state.timeArray)
+
+    ary[movid].array[timeid].selected=true
+    ary[movid].array.map(function(item) {
+      if(item.id==timeid) item.selected=true
+      else item.selected = false
+    })
+
+    this.setState({
+      timeArray: ary
+    })
+    
+  }
+
   _renderItem({item}){
-      times  = timeArray.map(function(item) {
+      that = this
+      id = item.id
+      
+      eachArray = item.array
+      times  = eachArray.map(function(item) {
+        
+       if(item.selected){
+         image = Images.selectborder
+         color = '#007ab9'
+       }else{
+        image = Images.border
+        color = 'black'
+       }
         return (
-                <View style={styles.timeView} key={item.id}>
-                    <Text style={styles.timeText}>{item.time}</Text>
-                </View>
+            <TouchableOpacity onPress={that.selectbook.bind(that,id,item.id)} key={item.id}>
+                <ImageBackground source={image} style={styles.border} >
+                    <Text style={[styles.timeText,{color:color}]}>{item.time}</Text>
+                </ImageBackground>
+            </TouchableOpacity>    
             );
       })
       return(
@@ -63,6 +106,7 @@ class Login extends Component {
   }
 
   render() {
+    
     return (
         <View style={styles.contentStyle}>
           <ImageBackground source={Images.backdance} style={styles.dance}>
@@ -78,11 +122,14 @@ class Login extends Component {
               <Image source={Images.sortdown} style={styles.sortdown}/>
             </TouchableOpacity>
           </View>
-          <FlatList
-            data={data}
-            keyExtractor={(item, index) => index}
-            renderItem={this._renderItem}
-          />
+          
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={this.state.timeArray}
+              keyExtractor={(item, index) => index}
+              renderItem={this._renderItem.bind(this)}
+            />
+          
           <Modal 
               backdropOpacity={0.5} 
               isVisible={this.state.visible}

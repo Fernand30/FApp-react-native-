@@ -14,6 +14,10 @@ class Login extends Component {
 
   constructor(props){
     super(props)
+    this.state=({
+      disable : 'auto'
+    })
+    disabled=false
   }
 
   // componentDidMount() {
@@ -42,11 +46,19 @@ class Login extends Component {
 
 
   chooseseat = () => {
-    const chooseseat = NavigationActions.navigate({
-      routeName: "ChooseSeat",
-      params: { name: "ChooseSeat" }
-    });
-    this.props.navigation.dispatch(chooseseat);
+    
+    
+    if(!disabled){
+      disabled=true
+      setTimeout(function () {
+        disabled=false;
+      }.bind(this), 1000);
+      const chooseseat = NavigationActions.navigate({
+        routeName: "ChooseSeat",
+        params: { name: "ChooseSeat" }
+      });
+      this.props.navigation.dispatch(chooseseat);
+    }
   };
 
   _renderItem({item}){
@@ -84,6 +96,7 @@ class Login extends Component {
           </View>
           <View style={styles.mainView}>
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={data}
               keyExtractor={(item, index) => index}
               renderItem={this._renderItem.bind(this)}
